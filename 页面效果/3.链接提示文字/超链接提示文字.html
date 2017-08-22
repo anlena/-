@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+</head>
+
+<body>
+    <div style="height:100px;">
+        <a href="javascript:;" class="link" title="超链接的标题，也是要提示的文字">这是个标题</a>
+    </div>
+
+    <script>
+        $(".link").mouseover(function(event) {
+            title = this.title;
+            this.title = "";
+            var tipBox = '<div id="tipContent">' + title + '</div>';
+            $('body').append(tipBox);
+            $("#tipContent").css({
+                'position': 'absolute',
+                'left': 'event.pageX+5',
+                'top': 'event.pageY+ 5'
+            });
+        }).mouseout(function() {
+            $('#tipContent').remove(); //移除提示内容元素
+            this.title = title; //为链接重新设置title值，为下次指向时使用。
+        }).mousemove(function(event) {
+            $('#tipContent').css({
+                'left': event.pageX + 5,
+                'top': event.pageY + 5
+            })
+        })
+    </script>
+
+</body>
+
+</html>

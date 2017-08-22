@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <a href="http://www.cnblogs.com/HCJJ/p/4869732.html">原文地址</a>
+</body>
+<script>
+    /*
+     * method => Ajax请求所采用的方法，GET或POST 
+     * URL => 所要请求页面的URL
+     * paras=> 发送时附加的参数
+     * callback => 完成请求或页面数据准备完毕时执行的方法 
+     */
+
+    function Ajax(method, url, paras, callback) {
+
+        function getXMLHttpReq() {
+            var XMLHttpReq = null;
+            if (window.XMLHttpRequest) {
+                XMLHttpReq = new XMLHttpRequest();
+            } else if (window.ActiveXObject) {
+                XMLHttpReq = new ActiveXObject('Microsoft.XMLHTTP');
+            }
+            return XMLHttpReq;
+        }
+        xhr = getXMLHttpReq();
+
+        if (method === 'POST') {
+            xhr.open('POST', url, true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            if (paras != '') {
+                xhr.send(paras);
+            } else {
+                xhr.send(null);
+            }
+        } else {
+            if (paras != '') {
+                url = encodeURI(url + '?' + paras);
+            }
+            xhr.open('GET', url, true);
+            xhr.send(null);
+        }
+
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                callback();
+            }
+        }
+    }
+
+    //调用方法
+    function Ajax1() {
+        Ajax('GET', 'test.php', '', function() {
+            document.getElementById('responseText').innerHTML = xhr.responseText;
+        })
+    }
+</script>
+
+</html>

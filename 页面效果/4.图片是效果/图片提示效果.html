@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            list-style: none;
+        }
+        
+        .clearfix:after {
+            display: block;
+            line-height: 0;
+            height: 0;
+            font-size: 0;
+            content: '';
+            clear: both;
+        }
+        
+        .clearfix {
+            *zoom: 1;
+        }
+        
+        .fl,
+        .fr {
+            display: inline;
+        }
+        
+        .fl {
+            float: left;
+        }
+        
+        .fr {
+            float: right;
+        }
+        
+        .hide {
+            display: none;
+        }
+        /* Style -Content- */
+        
+        body,
+        html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        ul li {
+            width: 360px;
+            height: 270px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <ul class="clearfix">
+        <li class="fl"><img src="1.png" alt="" width="360" height="270"></li>
+        <li class="fl"><img src="2.jpg" alt="" width="360" height="270"></li>
+        <li class="fl"><img src="3.jpg" alt="" width="360" height="270"></li>
+        <li class="fl"><img src="4.jpg" alt="" width="360" height="270"></li>
+    </ul>
+
+    <script>
+        $("ul li").mouseover(function(event) {
+            var imgSource = $(this).find('img').get(0);
+            var Odiv = document.createElement('div');
+            var Oimg = document.createElement('img');
+            Oimg.src = imgSource.src;
+            Oimg.alt = imgSource.alt;
+            Oimg.style.width = 400 + 'px';
+            Oimg.style.height = 200 + 'px';
+            Odiv.id = "Odiv";
+            Odiv.style.verticalAlign = "bottom";
+            Odiv.style.position = "absolute";
+            Odiv.style.left = event.pageX + 5 + 'px';
+            Odiv.style.top = event.pageY + 5 + 'px';
+            Odiv.appendChild(Oimg)
+            document.body.appendChild(Odiv);
+        }).mouseout(function() {
+            document.body.removeChild(document.getElementById('Odiv'));
+        }).mousemove(function() {
+            var Odiv = document.getElementById("Odiv")
+            Odiv.style.left = event.pageX + 5 + 'px'
+            Odiv.style.top = event.pageY + 5 + 'px';
+        })
+    </script>
+
+</body>
+
+</html>
