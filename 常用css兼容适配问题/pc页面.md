@@ -2,4 +2,5 @@
 
 2. [关于opacity](https://blog.csdn.net/freshlover/article/details/17143341)
 3. [rgna转ie透明值](https://kilianvalkhof.com/2010/css-html/how-to-use-rgba-in-ie/)
-4. ​
+4. [ie8兼容方案](http://www.cnblogs.com/zamhown/p/6709932.html)
+
