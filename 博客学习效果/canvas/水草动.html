@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>水草动</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            /* overflow: hidden; */
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="500" height="500"  style="background:#ccc;">
+        <p>you browser not support canvas!</p>
+    </canvas>
+</body>
+<script src="utils.js"></script>
+<script src="arrow.js"></script>
+<script>
+    window.onload = function(){
+        var canvas = document.getElementById('canvas');
+        var context = canvas.getContext("2d");
+        var centerX = canvas.width/2;
+        var centerY = canvas.height/2;
+
+    }
+
+
+    //水草类
+    function Aqu(color,num,amp){
+        this.startPoint = [];
+        this.endPointX = [];
+        this.endPointY = [];
+        this.amp = [];
+        this.beta = 0;
+        this.color = (color == undefined) ? "#3b154" : color;
+        this.num = (num == undefined) ? 80 : num;
+    }
+
+    Aqu.prototype.init = function(){
+        for(var i = 0; i < this.num;i++){
+            this.startPoint[i] = Math.random()*20 + i*10;
+            this.endPointX[i] = this.startPoint[i];
+            this.endPointY[i] = canvas.height/1.5 - Math.random()*50;
+            this.amp[i] = Math.random()*10 + 40;
+        }
+    }
+</script>
+</html>
