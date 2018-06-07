@@ -1,37 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>水草动</title>
     <style>
-        *{
+        * {
             margin: 0;
             padding: 0;
             /* overflow: hidden; */
         }
     </style>
 </head>
+
 <body>
-    <canvas id="canvas" width="500" height="500"  style="background:#ccc;">
+    <canvas id="canvas" width="500" height="500" style="background:#ccc;">
         <p>you browser not support canvas!</p>
     </canvas>
 </body>
 <script src="utils.js"></script>
 <script src="arrow.js"></script>
 <script>
-    window.onload = function(){
-        var canvas = document.getElementById('canvas');
-        var context = canvas.getContext("2d");
-        var centerX = canvas.width/2;
-        var centerY = canvas.height/2;
+    var canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext("2d");
+    canvas.height = 400;
+    canvas.width = 800;
 
-    }
+
 
 
     //水草类
-    function Aqu(color,num,amp){
+    function Aqu(color, num, amp) {
         this.startPoint = [];
         this.endPointX = [];
         this.endPointY = [];
@@ -41,13 +42,60 @@
         this.num = (num == undefined) ? 80 : num;
     }
 
-    Aqu.prototype.init = function(){
-        for(var i = 0; i < this.num;i++){
-            this.startPoint[i] = Math.random()*20 + i*10;
+    Aqu.prototype.init = function () {
+        for (var i = 0; i < this.num; i++) {
+            this.startPoint[i] = Math.random() * 20 + i * 10;
             this.endPointX[i] = this.startPoint[i];
-            this.endPointY[i] = canvas.height/1.5 - Math.random()*50;
-            this.amp[i] = Math.random()*10 + 40;
+            this.endPointY[i] = canvas.height / 1.5 - Math.random() * 50;
+            this.amp[i] = Math.random() * 10 + 40;
         }
     }
+
+    Aqu.prototype.draw = function (ctx) {
+        ctx.save();
+        ctx.lineWidth = 14;
+        ctx.lineGap = "round";
+        ctx.globalAlpha = 0.8;
+        ctx.strokeStyle = this.color;
+
+        // Math.sin的应用
+        this.beta += del * 0.0012;
+        var l = Math.sin(this.beta);
+
+        for (var i = 0; i < this.num; i++) {
+            ctx.beginPath();
+            ctx.moveTo(this.startPoint[i], canvas.height);
+
+            //周期性改变水草的顶点x坐标
+            this.endPointX[i] = this.startPoint[i] + l * this.amp[i];
+
+            ctx.quadraticCurveTo(this.startPoint[i], canvas.height - 120, this.endPointX[i], this.endPointY[i]);
+            ctx.stroke();
+        }
+        ctx.restore();
+    }
+
+
+
+    //实例水草
+    var oAqu = new Aqu();
+    //初始化
+    oAqu.init();
+
+    var oldTime = new Date().getTime(),
+        del = null,
+        newTime = null;
+
+    (function drawFrmae() {
+        window.requestAnimationFrame(drawFrmae);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        newTime = new Date().getTime();
+        del = new Date().getTime() - oldTime;
+        oldTime = newTime;
+
+        oAqu.draw(ctx);
+    }())
 </script>
+
 </html>
