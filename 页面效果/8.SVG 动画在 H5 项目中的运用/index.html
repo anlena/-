@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 示例 -->
+    <!-- <svg width="1000" height="1000" viewBox="0 0 1000 1000" version="1.1" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="300" cy="300" r="120" fill="red"></circle>
+        <path stroke="red" stroke-width="5" d="M200,490,L700,490"></path>
+        <text x="200" y="600" fill="blue" font-size="50">
+            这是一个圆
+        </text>
+    </svg> -->
+
+    <!-- 范例一 -->
+    <svg width="1000" height="1000" viewBox="0 0 1000 1000" version="1.1" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="100" cy="100" r="30" fill="blue" opacity="0">
+            <!-- <animate attributeName="opacity" from="1" to="0" begin="0s" dur="1s" repeatCount="1" fill="freeze"></animate> -->
+            <animate attributeName="opacity" values="0;1;0;1;0;1;0;1" begin="0s" dur="0.5s" repeatCount="1" fill="freeze" />
+        </circle>
+        <circle cx="500" cy="300" r="30" fill="blue" opacity="0">
+            <animate attributeName="opacity" values="0;1;0;1;0;1;0;1" begin="1s" dur="0.5s" repeatCount="1" fill="freeze" />
+        </circle>
+        <path stroke="blue" stroke-width="3" d="M115,115,L115,115" >
+            <animate attributeName="d" values="M115,115,L115,115;M115,115,L515,315" begin="0.5s" dur="0.5s" repeatCount="1" fill="freeze"></animate>
+        </path>
+
+    </svg>
+</body>
+
+</html>
